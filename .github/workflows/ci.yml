@@ -22,10 +22,10 @@ jobs:
           dotnet-version: '8.0.101'  # Replace with the version you’re using
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore CodeFlow/CodeFlowCore/CodeFlowCore.csproj  # Use the correct path to your .csproj file
 
       - name: Build project
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build CodeFlow/CodeFlowCore/CodeFlowCore.csproj --no-restore --configuration Release  # Adjust the path
 
       - name: Run tests
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test CodeFlow/CodeFlowCore/CodeFlowCore.csproj --no-build --verbosity normal  # Adjust the path
