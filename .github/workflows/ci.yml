@@ -29,3 +29,12 @@ jobs:
 
       - name: Run tests
         run: dotnet test CodeFlowCore/CodeFlowCore.csproj --no-build --verbosity normal  # Adjust the path
+
+      - name: Publish project
+        run: dotnet publish CodeFlowCore/CodeFlowCore.csproj --configuration Release --output ./output  # Output directory
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: compiled-files
+          path: ./output  # Path to the output directory
