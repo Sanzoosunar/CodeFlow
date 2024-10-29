@@ -24,6 +24,9 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore CodeFlowCore/CodeFlowCore.csproj  # Use the correct path to your .csproj file
 
+      - name: Restore dependencies for test project
+        run: dotnet restore CodeFlowCore/UnitTestingCL/UnitTestingCL.csproj
+
       - name: Build project
         run: dotnet build CodeFlowCore/CodeFlowCore.csproj --no-restore --configuration Release  # Adjust the path
         #run: dotnet build --no-restore --configuration Release  # Adjust the path
