@@ -3,6 +3,7 @@ using CodeFlowCore.Models;
 using CodeFlowCore.Repos;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace UnitTestingCL.RepoLayer
         public void Login_ValidLogin_ReturnAuthUser()
         {
             //Arranage
-            LoginDto login = new LoginDto() {UserName="admin",Password="admin" };
+            LoginDto login = new LoginDto() {UserName="admin2",Password="admin" };
 
             var expected = new AuthUser() { UserName = "admin" };
 
@@ -42,7 +43,7 @@ namespace UnitTestingCL.RepoLayer
             LoginDto login = new LoginDto() { UserName = "user", Password = "user" };
 
             //Assert & Act
-            Assert.Throws<InvalidDataException>(() =>
+            Assert.Throws<ArgumentNullException>(() =>
             {
                 _authRepo.Login(login);
             });
