@@ -29,7 +29,7 @@ jobs:
         #run: dotnet build --no-restore --configuration Release  # Adjust the path
      
       - name: Run tests
-        run: dotnet test CodeFlowCore/UnitTestingCL/UnitTestingCL.csproj --no-build --verbosity normal  # Adjust the path
+        run: dotnet test CodeFlowCore/UnitTestingCL/UnitTestingCL.csproj --no-restore --configuration Release  # Adjust the path
 
       - name: Publish project
         run: dotnet publish CodeFlowCore/CodeFlowCore.csproj --configuration Release --output ./output  # Output directory
