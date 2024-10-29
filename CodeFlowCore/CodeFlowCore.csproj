@@ -10,7 +10,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="UnitTestingCL\**" />
+    <Content Remove="UnitTestingCL\**" />
+    <EmbeddedResource Remove="UnitTestingCL\**" />
+    <None Remove="UnitTestingCL\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DBHelper\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
