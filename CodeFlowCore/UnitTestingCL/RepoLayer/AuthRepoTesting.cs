@@ -25,7 +25,7 @@ namespace UnitTestingCL.RepoLayer
         public void Login_ValidLogin_ReturnAuthUser()
         {
             //Arranage
-            LoginDto login = new LoginDto() {UserName="admin2",Password="admin" };
+            LoginDto login = new LoginDto() {UserName="admin",Password="admin" };
 
             var expected = new AuthUser() { UserName = "admin" };
 
@@ -43,7 +43,7 @@ namespace UnitTestingCL.RepoLayer
             LoginDto login = new LoginDto() { UserName = "user", Password = "user" };
 
             //Assert & Act
-            Assert.Throws<ArgumentNullException>(() =>
+            Assert.Throws<InvalidDataException>(() =>
             {
                 _authRepo.Login(login);
             });
