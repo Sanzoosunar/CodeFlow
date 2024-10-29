@@ -25,8 +25,8 @@ jobs:
         run: dotnet restore CodeFlowCore/CodeFlowCore.csproj  # Use the correct path to your .csproj file
 
       - name: Build project
-        #run: dotnet build CodeFlowCore/CodeFlowCore.csproj --no-restore --configuration Release  # Adjust the path
-        run: dotnet build --no-restore --configuration Release  # Adjust the path
+        run: dotnet build CodeFlowCore/CodeFlowCore.csproj --no-restore --configuration Release  # Adjust the path
+        #run: dotnet build --no-restore --configuration Release  # Adjust the path
      
       - name: Run tests
         run: dotnet test CodeFlowCore/CodeFlowCore.csproj --no-build --verbosity normal  # Adjust the path
