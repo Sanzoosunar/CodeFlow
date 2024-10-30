@@ -75,13 +75,13 @@ jobs:
             --version-label ${{ github.run_id }} \
             --source-bundle S3Bucket=deploy-dotnet-app-s3,S3Key=app.zip
 
-      # - name: Update Elastic Beanstalk Environment
-      #   run: |
-      #     aws elasticbeanstalk update-environment \
-      #       --environment-name Dotnet-deploy-dev \
-      #       --version-label ${{ github.run_id }}
       - name: Update Elastic Beanstalk Environment
         run: |
-          aws elasticbeanstalk create-environment \
-            --environment-name Dotnet-deploy-prod \
+          aws elasticbeanstalk update-environment \
+            --environment-name Dotnet-deploy-dev \
             --version-label ${{ github.run_id }}
+      # - name: Update Elastic Beanstalk Environment
+      #   run: |
+      #     aws elasticbeanstalk create-environment \
+      #       --environment-name Dotnet-deploy-prod \
+      #       --version-label ${{ github.run_id }}
