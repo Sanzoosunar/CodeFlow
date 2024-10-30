@@ -1,0 +1,73 @@
+name: CI Build
+
+on:
+  push:
+    branches:
+      - master  # Triggers the workflow on pushes to the main branch
+  pull_request:
+    branches:
+      - master  # Optional: also triggers on pull requests to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.101'  # Replace with the version you’re using
+
+      - name: Restore dependencies
+        run: dotnet restore CodeFlowCore/CodeFlowCore.csproj  # Use the correct path to your .csproj file
+
+      - name: Restore dependencies for test project
+        run: dotnet restore CodeFlowCore/UnitTestingCL/UnitTestingCL.csproj
+
+      - name: Build project
+        run: dotnet build CodeFlowCore/CodeFlowCore.csproj --no-restore --configuration Release  # Adjust the path
+        #run: dotnet build --no-restore --configuration Release  # Adjust the path
+     
+      - name: Run tests
+        run: dotnet test CodeFlowCore/UnitTestingCL/UnitTestingCL.csproj --no-restore --configuration Release  # Adjust the path
+
+      - name: Publish project
+        run: dotnet publish CodeFlowCore/CodeFlowCore.csproj --configuration Release --output ./output  # Output directory
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: compiled-files
+          path: ./output  # Path to the output directory
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build  # Ensure the build job is complete
+
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+
+  #     - name: Configure AWS CLI
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       with:
+  #         aws-access-key-id:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         aws-region: us-east-1  # Specify your desired region
+
+  #     - name: Publish and Zip Application
+  #         run: |
+  #           # Publish the application and create a zip file
+  #           dotnet publish -c Release -o ./publish
+  #           cd ./publish
+  #           zip -r ../app.zip .
+  
+  #       - name: Upload to S3
+  #         run: |
+  #           aws s3 cp ../app.zip s3://deploy-dotnet-app-s3/app.zip
+
+
+  
