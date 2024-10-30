@@ -60,10 +60,10 @@ jobs:
       - name: Publish and Zip Application
         run: |
           # Publish the application and create a zip file
-          dotnet publish CodeFlowCore/CodeFlowCore.csproj -c Release -o ./publish
+          dotnet publish CodeFlowCore/CodeFlowCore.csproj -c Release --output ./publish
           cd ./publish
-          zip -r ../app.zip .
+          zip -r app.zip .
 
       - name: Upload to S3
         run: |
-          aws s3 cp ../app.zip s3://deploy-dotnet-app-s3/app.zip
+          aws s3 cp ./publish/app.zip s3://deploy-dotnet-app-s3/app.zip
